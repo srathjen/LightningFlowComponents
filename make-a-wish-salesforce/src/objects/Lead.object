@@ -18576,15 +18576,6 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
     <errorMessage>The status of a DNQd Lead cannot be updated.</errorMessage>
 	    </validationRules>
 	    <validationRules>
-        <fullName>Lead_Referral_Date_Validation</fullName>
-        <active>false</active>
-        <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
-        <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != 'Integration')
-&amp;&amp;
-RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorMessage>The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Lead_Referrer_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
@@ -18623,28 +18614,6 @@ RecordType.Name ="Wish Child"
 RecordType.Name ="Wish Child"</errorConditionFormula>
     <errorDisplayField>Status</errorDisplayField>
     <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Paper DV.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Status_Restrict_on_Referred</fullName>
-        <active>false</active>
-        <description>Restrict the lead owner from changing the status from Eligibility Review</description>
-        <errorConditionFormula>AND( 
-$Profile.Name != 'Full Access National Staff', 
-$Profile.Name != 'National Medical Advisor', 
-$Profile.Name != 'System Administrator',                                                              
-ISCHANGED(Status), 
-ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'), 
-ISPICKVAL(Status,'Referred'), 
-CASE(Sub_Status__c,
-"Pending Diagnosis Verification",1,
-"Pending Part A",1,
-"Pending Paper DV",1,
-0)=0 
-)
-&amp;&amp;
-RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorDisplayField>Status</errorDisplayField>
-        <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Status_Restriction_on_Eligibility</fullName>

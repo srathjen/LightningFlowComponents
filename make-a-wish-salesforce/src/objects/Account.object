@@ -10725,14 +10725,6 @@ Parent.RecordType.Name != "Hospital Treatment Facility"
         <errorDisplayField>ParentId</errorDisplayField>
         <errorMessage>The Parent Account of an HTF Account must be another HTF Account.</errorMessage>
     </validationRules>
-    <validationRules>
-        <fullName>Program_NationalStaff_Account_Validation</fullName>
-        <active>false</active>
-        <description>This validation will fire when Program&amp;National Staff trying to create other than In-Kind Account</description>
-        <errorConditionFormula>(AND ( OR ( $Profile.Name  = 'Chapter Dev/Fin Staff' , 
-          $Profile.Name = 'Read Only National Staff') , RecordType.Name  &lt;&gt; 'In Kind Donors'))&amp;&amp; Migrated_Record__c = false</errorConditionFormula>
-        <errorMessage>You don't have access to create to this type of  account</errorMessage>
-    </validationRules>
     <webLinks>
         <fullName>Loop__LOOP</fullName>
         <availability>online</availability>

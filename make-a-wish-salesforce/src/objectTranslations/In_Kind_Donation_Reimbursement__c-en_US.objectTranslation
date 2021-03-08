@@ -914,10 +914,6 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <errorMessage><!-- You should enter the reason for changing the gift value --></errorMessage>
         <name>InKind_Gift_Value_Change_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please add the attachment otherwise should select attachment as &apos;No&apos;, or  if attachment is added value should be Yes- Attached --></errorMessage>
-        <name>Inkind_Reimbursement_Attachment_Validati</name>
-    </validationRules>
     <webLinks>
         <label><!-- Search_Add_In_Kind_Donor --></label>
         <name>Search_Add_In_Kind_Donor</name>

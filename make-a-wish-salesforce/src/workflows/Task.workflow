@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Rescheduled_Email_Alert</fullName>
         <description>Rescheduled Email Alert</description>
@@ -122,106 +121,6 @@
             <value>True</value>
         </criteriaItems>
         <description>Used to close multiple tasks from a list view.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Task%3A Email Notification for Interivew Task</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Task.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Interview</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>When Interview task is created by Volunteer that time, It wil send an email notification to Interviewer.</description>
-        <triggerType>onCreateOnly</triggerType>
-    </rules>
-    <rules>
-        <fullName>Task%3A Email Notification for InterviewTask Rescheduled Workflow Rule</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Task.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Interview</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Task.Status</field>
-            <operation>equals</operation>
-            <value>Rescheduled</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>This workflow will send email alert to task owner when the status is Rescheduled</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Task%3AInterview Cancelled Workflow Rule</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Task.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Interview</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Task.Status</field>
-            <operation>equals</operation>
-            <value>Rescheduled</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>This workflow rule will fire when the interview is cancelled</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Task%3AInterview Scheduled Workflow Rule</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Task.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Interview</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Task.Status</field>
-            <operation>equals</operation>
-            <value>Scheduled</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>This workflow rule will fire when the interview is scheduled</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Task%3AInterview completed Workflow Rule</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Task.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Interview</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Task.Status</field>
-            <operation>equals</operation>
-            <value>Approved</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>This workflow rule will fire when the interview is complete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <tasks>

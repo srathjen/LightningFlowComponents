@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Additional Medical Requests --></label>
         <name>Additional_Medical_Requests</name>
@@ -3253,10 +3253,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Wish_Planning_Anticipation</name>
     </recordTypes>
     <validationRules>
-        <errorMessage><!-- There should be value on Date - Absent Parent Form when wish status is Completed. --></errorMessage>
-        <name>Absent_Parent_Form_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- You do not have permission to remove or change the Wish Child on the Wish Case. --></errorMessage>
         <name>Cannot_Change_or_Delete_Wish_Child</name>
     </validationRules>
@@ -3265,20 +3261,8 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Adoptable_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- From Budget Approval - Approved, the status can only be changed to Wish Design, Wish Scheduled, On-Hold, Inactive, DNQ, Closed (or Ready to Interview &amp; Wish Determined with Program Supervisor permission set). --></errorMessage>
-        <name>Case_Budget_Approval_Approved</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- When the budget is approved, it will automatically update to Budget Approval - Approved status. The status cannot be changed manually from this status without Program Supervisor permission set. --></errorMessage>
-        <name>Case_Budget_Approval_Submitted</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- Please explain reason to expedite the process in Please Explain Expedite field in Lead. --></errorMessage>
         <name>Case_Check_Expedite_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- You cannot change the owner of the subcase --></errorMessage>
-        <name>Case_ChildCaseOwnerChangeValidation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- The closed date cannot occur before the referral date. Please enter a valid closed date, or re-enter the referral date. --></errorMessage>
@@ -3287,10 +3271,6 @@ arrangements/unique circumstances for any requested wish participant not residin
     <validationRules>
         <errorMessage><!-- You do not have permission to edit this record. Please contact your program supervisor to edit the date --></errorMessage>
         <name>Case_Closed_Date_Change_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Before the case is closed, a closed date value must be entered. Deactivated for SIW-490. This blocks the save prior to being able to prompt user for a Closed Date. --></errorMessage>
-        <name>Case_Closed_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Only Program Supervisor permission set can change from Closed to any other status. --></errorMessage>
@@ -3317,16 +3297,8 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Granted</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- From Hold, they can only go back to the previous status. --></errorMessage>
-        <name>Case_Hold_Rule</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- The inactive date cannot occur before the referral date. Please enter a valid inactive date, or re-enter the referral date. --></errorMessage>
         <name>Case_Inactive_Date_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- From Inactive, they can only go back to the previous status. --></errorMessage>
-        <name>Case_Inactive_Rule</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- The inquiry date entered occurs before the wish child&apos;s date of birth. Please enter a valid inquiry date, or re-enter the wish child&apos;s birthdate. --></errorMessage>
@@ -3357,10 +3329,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Prevent_Qualified_Status</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date. --></errorMessage>
-        <name>Case_Qualified_Date_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- From Ready To Interview, the status can only be changed to Wish Determined, Inactive, Closed, or Ready to Assign. --></errorMessage>
         <name>Case_Ready_To_Interview_Status</name>
     </validationRules>
@@ -3381,28 +3349,12 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Rush_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Case status of &quot;&apos;Additional Information for Review&apos;&quot; can only be selected on corresponding Lead record by Intake Manager --></errorMessage>
-        <name>Case_Status_Restrict_on_Additional</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please select valid timeframe --></errorMessage>
-        <name>Case_Timeframe_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- From Wish Design, the status can only be changed to Ready to Interview, Wish Determined, Pending Approval, Wish Scheduled, Inactive, or Closed. --></errorMessage>
         <name>Case_Wish_Design</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- From Wish Determined, the status can only be changed to Pending Approval, Inactive, or Closed (or Ready to Interview with Program Supervisor permission set). --></errorMessage>
         <name>Case_Wish_Determined</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Meet PWL Criteria needs to be present when wish status is Wish Determined --></errorMessage>
-        <name>Case_Wish_Determined_Status_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- You should enter value for sub status when the status is Wish Determined. --></errorMessage>
-        <name>Case_Wish_Determined_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- From Wish Scheduled, the status can only be changed to Wish Design, Granted, Inactive, or Closed (or Ready to Interview &amp; Wish Determined with Program Supervisor permission set). --></errorMessage>
@@ -3417,48 +3369,12 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Chapter_Medical_Advisor_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- There should be value on Date - Child’s Medical Summary Form when wish status is Completed. --></errorMessage>
-        <name>Childs_Medical_Summary_Form_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Communication Profile when wish status is Completed. --></errorMessage>
-        <name>Communication_Profile_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- Diagnosis Verification Received Date should not be Blank. --></errorMessage>
         <name>Diagnosis_Verification_Received_Date</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- There should be value on Date - Entertainment &amp; Sports when wish status is Completed. --></errorMessage>
-        <name>Entertainment_Sports_Wish_LOValidation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Guardianship Document when wish status is Completed. --></errorMessage>
-        <name>Guardianship_Document_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Liability Release and Authorization when wish status is Completed. --></errorMessage>
-        <name>Liability_Release_and_Authorization_Date</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please reach out to your supervisor to change the wish type and open a new case. --></errorMessage>
-        <name>National_type_editable</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Passports when wish status is Completed. --></errorMessage>
-        <name>Passports_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- Please fill the value for  corresponding date fields. --></errorMessage>
         <name>Planing_Case_Form_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- The status cannot be changed manually from this status --></errorMessage>
-        <name>Prevent_Case_Budget_Approval_Approved</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- The status cannot be changed manually from this status. --></errorMessage>
-        <name>Prevent_Case_Budget_Approval_Submitted</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter qualifying diagnosis --></errorMessage>
@@ -3477,32 +3393,8 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Restrict_Wish_Close</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- There should be value on Date - Single Parent Form when wish status is Completed. --></errorMessage>
-        <name>Single_Parent_Form_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Visas when wish status is Completed. --></errorMessage>
-        <name>Visas_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Wish Child Form when wish status is Completed. --></errorMessage>
-        <name>Wish_Child_Form_Receive_Date_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- There should be a value for End date when wish status is Completed --></errorMessage>
         <name>Wish_Completed_Status_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Wish Family Form when wish status is Completed. --></errorMessage>
-        <name>Wish_Family_Form_Receive_Date_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Wish Information Form when wish status is Completed. --></errorMessage>
-        <name>Wish_Information_Form_Rece_Date_Validat</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- There should be value on Date - Wish Safety Authorization Part B Form when wish status is Completed. --></errorMessage>
-        <name>Wish_Safety_Authorization_PartB_Form</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- There should be a value for start date when wish status is wish scheduled --></errorMessage>

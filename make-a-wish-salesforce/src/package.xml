@@ -4704,8 +4704,55 @@
     <name>WorkflowAlert</name>
   </types>
   <types>
+    <members>Background_check__c.Bc%3A Volunteer Opportunity Status Update</members>
+    <members>Background_check__c.Bc%3ACompleted Workflow Rule</members>
+    <members>Background_check__c.Bc%3AExpiring 30 Days Workflow Rule</members>
+    <members>Case.Case %3A Abandoned Wish Rule</members>
+    <members>Case.Case %3A Unassigned  Wish Workflow Rule</members>
+    <members>Case.Case%3A Email to MAC Team</members>
+    <members>Case.Case%3A Wish Child Birthday</members>
+    <members>Case.Case%3ABirthday Task</members>
+    <members>Case.Case%3AFollow-up on wish clearance</members>
+    <members>Case.Case%3AQualifying Medical Professional when wish is determined</members>
+    <members>Case.Notification to Development Team Regarding Wish Presentation Rule</members>
+    <members>Case.Send Email to National Team</members>
+    <members>Case.Send Reply email to MAC team</members>
+    <members>Case.Send Reply Email to National MAC Team</members>
+    <members>Case.Wish %3A InActive Wish Granter Alert Workflow Rule</members>
+    <members>Case.Wish Family Form Not Submitted Alert Rule</members>
+    <members>Case.Wish%3A Task For Family Form Not Submitted</members>
+    <members>Case.Wish%3AInterview Date Not Set After 21 Days</members>
+    <members>Conflict_Of_Interest__c.COI%3AExpiring 30 Days Workflow Rule</members>
+    <members>Contact.Contact%3ARush Wish Reminder %26 Alerts</members>
+    <members>Contact.Volunteer %3A Application Approved Workflow Rule</members>
+    <members>Contact.Volunteer %3A Application Completed Workflow Rule</members>
+    <members>Contact.Volunteer %3A Application Incompleted Workflow Rule</members>
+    <members>Contact.Volunteer %3AInterview Task completed Workflow Rule</members>
+    <members>Contact.Volunteer%3A Interview Date Not Set After Application Completed 7_30_Days Workflow</members>
     <members>dsfs__DocuSign_Recipient_Status__c.Send DV Signature Reminder to Medical Professional</members>
     <members>dsfs__DocuSign_Recipient_Status__c.Update Lead Owner Email for notification</members>
+    <members>Lead.Lead %28Wish Child%29%3A Send Duplicate Referral Email Alert</members>
+    <members>Lead.Lead%3AQualifying Medical Professional when child is NOT eligible</members>
+    <members>npe5__Affiliation__c.Communities%3ANew Active Volunteer Welcome Workflow Rule</members>
+    <members>Task.Task%3A Email Notification for Interivew Task</members>
+    <members>Task.Task%3A Email Notification for InterviewTask Rescheduled Workflow Rule</members>
+    <members>Task.Task%3AInterview Cancelled Workflow Rule</members>
+    <members>Task.Task%3AInterview completed Workflow Rule</members>
+    <members>Task.Task%3AInterview Scheduled Workflow Rule</members>
+    <members>Volunteer_Opportunity__c.Volunteer Opportunity %3A Non - Wish Approved</members>
+    <members>Volunteer_Opportunity__c.Volunteer Opportunity %3A Non - Wish Rejected</members>
+    <members>Volunteer_Opportunity__c.Volunteer Opportunity %3A Wish Approved</members>
+    <members>Volunteer_Opportunity__c.Volunteer Opportunity %3A Wish Rejected</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3A Self Faced Orientation Registered Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3A Self Faced Training Registered Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3AOrientation Cancelled Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3AOrientation Completed Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3AOrientation Registered Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3ATraining Cancelled Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3ATraining Completed Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.O%26T%3ATraining Registered Workflow Rule</members>
+    <members>Volunteer_Orientation_Training__c.Training%3A Pending Volunteer%2C Virtual Self Paced Cancelled  Workflow</members>
+    <members>Volunteer_Orientation_Training__c.Training%3A Pending Volunteer%2C Virtual Self Paced Registered Workflow</members>
     <name>WorkflowRule</name>
   </types>
   <version>48.0</version>

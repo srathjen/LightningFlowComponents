@@ -196,34 +196,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Bc%3A Volunteer Opportunity Status Update</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Date_Requested__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <description>This workflow will fire when the background record is expired.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Update_IsBackground_Expire</name>
-                <type>FieldUpdate</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>0</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
         <fullName>Bc%3A Volunteer Opportunity Status Update when BC Expired</fullName>
         <active>true</active>
         <criteriaItems>
@@ -286,33 +258,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Bc%3ACompleted Workflow Rule</fullName>
-        <active>false</active>
-        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
-        <criteriaItems>
-            <field>Background_check__c.Status__c</field>
-            <operation>equals</operation>
-            <value>Approved,Approved w/ Conditions</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Current__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Volunteer_is_Inactive__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>This workflow will fire when the background check status is completed</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
         <fullName>Bc%3AExpired 7 Days After Workflow Rule</fullName>
         <active>true</active>
         <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
@@ -358,112 +303,6 @@
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>7</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Bc%3AExpiring 30 Days Workflow Rule</fullName>
-        <active>false</active>
-        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
-        <criteriaItems>
-            <field>Background_check__c.Current__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Date__c</field>
-            <operation>greaterThan</operation>
-            <value>TODAY</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Status__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Status__c</field>
-            <operation>notEqual</operation>
-            <value>Rejected</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.Volunteer_is_Inactive__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Background_check__c.VolunteerRoleTrainedTpendChapReview__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <description>This rule will fire when the background check is Expiring with in 30 days</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_2_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_2_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-2</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_9_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_9_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-9</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>7</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_16_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_16_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-16</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_23_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_23_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-23</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>

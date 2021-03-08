@@ -500,30 +500,6 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Lead %28Wish Child%29%3A Send Duplicate Referral Email Alert</fullName>
-        <actions>
-            <name>Duplicate_Lead_Referral_Inquiry_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Untick_Duplicate_Referral_Email</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Lead.Lead_Owner_Dupe_Alert__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Lead.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish Child</value>
-        </criteriaItems>
-        <description>Send Duplicate Referral Email Alert if Duplicate Lead Found</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
         <fullName>Lead%3A Alert New DV Signer</fullName>
         <actions>
             <name>Fire_New_DV_Signer_Alert</name>
@@ -559,30 +535,6 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
         </criteriaItems>
         <description>Moves the Matched  and unmatched Referring MP values into the fields used for the referral confirmation Email</description>
         <triggerType>onCreateOnly</triggerType>
-    </rules>
-    <rules>
-        <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
-        <actions>
-            <name>Lead_Email_Alert_to_Qualifying_Medical_Professional_when_child_is_NOT_eligible</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Lead.Status</field>
-            <operation>equals</operation>
-            <value>DNQ</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>It send a email notification to Qualifying Medical Professional when child is NOT eligible.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <tasks>
         <fullName>Lead_ET_Chapter_has_been_changed</fullName>
