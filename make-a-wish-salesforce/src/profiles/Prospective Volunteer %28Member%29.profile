@@ -25619,7 +25619,7 @@
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Medical Professional - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Medical_Professional</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -25627,11 +25627,11 @@
         <recordType>Contact.Volunteer_Contact</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Wish Child - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Wish Family - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Wish_Family</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -26507,7 +26507,7 @@
         <layout>npe4__Relationship_Error__c-npe4__Relationship Error Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>npe4__Relationship__c-Relationship Layout - Volunteer</layout>
+        <layout>npe4__Relationship__c-npe4__Relationship Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>npe5__Affiliation__c-npe5__Affiliation Layout</layout>

@@ -25619,19 +25619,19 @@
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Medical Professional - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Medical_Professional</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Volunteer info for volunteers</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Volunteer_Contact</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Wish Child - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Wish Family - Volunteer</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Wish_Family</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -25992,11 +25992,11 @@
         <layout>Non_Wish_Events__c-Event Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Non_Wish_Events__c-Event for Volunteers</layout>
+        <layout>Non_Wish_Events__c-Event Layout</layout>
         <recordType>Non_Wish_Events__c.Events</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Non_Wish_Events__c-Non Wish for Volunteers</layout>
+        <layout>Non_Wish_Events__c-Event Layout</layout>
         <recordType>Non_Wish_Events__c.Non_Wish</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -26272,22 +26272,22 @@
         <layout>Volunteer_Feedback__c-Volunteer Feedback Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Volunteer_Opportunity__c-Non Wish %26 Event for Volunteers</layout>
+        <layout>Volunteer_Opportunity__c-Non Wish %26 Event</layout>
         <recordType>Volunteer_Opportunity__c.Non_Wish_Event</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Volunteer_Opportunity__c-Registered Non Wish Volunteer</layout>
+        <layout>Volunteer_Opportunity__c-Non Wish %26 Event</layout>
         <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Non_Wish</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Volunteer_Opportunity__c-Registered Wish Volunteer</layout>
+        <layout>Volunteer_Opportunity__c-Non Wish %26 Event</layout>
         <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Wish</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Volunteer_Opportunity__c-Wish for Volunteer</layout>
+        <layout>Volunteer_Opportunity__c-Non Wish %26 Event</layout>
         <recordType>Volunteer_Opportunity__c.Wish</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -26507,7 +26507,7 @@
         <layout>npe4__Relationship_Error__c-npe4__Relationship Error Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>npe4__Relationship__c-Relationship Layout - Volunteer</layout>
+        <layout>npe4__Relationship__c-npe4__Relationship Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>npe5__Affiliation__c-npe5__Affiliation Layout</layout>
