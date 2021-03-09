@@ -25427,11 +25427,11 @@
         <recordType>Account.Chapter</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Account-Hospital Treatment Facility - Volunteer</layout>
+        <layout>Account-Chapters</layout>
         <recordType>Account.Hospital_Treatment_Facility</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Account-Household Layout - Volunteers</layout>
+        <layout>Account-Chapters</layout>
         <recordType>Account.HH_Account</recordType>
     </layoutAssignments>
     <layoutAssignments>
