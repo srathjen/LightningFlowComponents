@@ -25424,6 +25424,10 @@
         <layout>AccessTokenList__mdt-AccessTokenList Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Account-Chapters</layout>
+        <recordType>Account.Chapter</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Account-Hospital Treatment Facility - Volunteer</layout>
         <recordType>Account.Hospital_Treatment_Facility</recordType>
     </layoutAssignments>
